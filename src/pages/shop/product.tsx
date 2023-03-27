@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ShopContext } from "../../context/shop-context";
+import { CartContext } from "../../context";
 
 interface iProduct {
   id: number;
@@ -15,7 +15,7 @@ interface iProps {
 const Product = ({ data }: iProps) => {
   const { id, name, price, image } = data;
 
-  const { addToCart, cartItems }: any = useContext(ShopContext);
+  const { cartItems, handleAddtoCart }: any = useContext(CartContext);
   const cartItemsSum = cartItems[id];
 
   return (
@@ -25,7 +25,7 @@ const Product = ({ data }: iProps) => {
         <p className="fw-bold">{name}</p>
         <p className="text-muted fw-bold">${price}</p>
       </div>
-      <button className="add-to-cart-btn" onClick={() => addToCart(id)}>
+      <button className="add-to-cart-btn" onClick={() => handleAddtoCart(id)}>
         Add To Cart {cartItemsSum > 0 && <>({cartItemsSum})</>}
       </button>
     </div>
